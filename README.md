@@ -16,13 +16,13 @@ npm install
 # Запуск
 
 ### Всего подряд
-
+```
 $ npm test
-
+```
 ### Одного раздела
-
+```
 $ protractor conf.coffee --specs=spec/<spec-name>
-
+```
 
 # Useful links
 
