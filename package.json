@@ -14,7 +14,10 @@
   },
   "author": "Yury Tvardovsky",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://www.git.dev.globalpas.com/tvardy/e2e-testsuite.git"
+  },
   "devDependencies": {
-    
   }
 }
