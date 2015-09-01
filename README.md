@@ -1,13 +1,19 @@
 # Установка
 
-(nodejs)[https://nodejs.org/] - в соответствии с инструкцией для конкретной ОС
+[NodeJS](https://nodejs.org/) - в соответствии с инструкцией для конкретной ОС
 
 ### в никсах
 ```
 $ sudo npm -g install coffee-script protractor phantomjs
 $ npm install
 ```
-### в окнах из nodejs консоли
+### в окнах 
+
+установить
+* [Python27](https://www.python.org/downloads/release/python-2710/)
+* [.NET Framework 2.0 SDK](http://www.microsoft.com/en-us/download/confirmation.aspx?id=19988)
+
+и из nodejs консоли
 ```
 npm -g install coffee-script protractor phantomjs
 npm install
