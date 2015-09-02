@@ -59,6 +59,11 @@ module.exports = do ->
   # --- НАВИГАЦИЯ --- прокрутка
   .when "прокрутить страницу вниз", ->
     browser.executeScript('window.scrollTo(0,document.body.scrollHeight);')
+  .when "прокрутить страницу вверх", ->
+    browser.executeScript('window.scrollTo(0,0);')
+  # --- НАВИГАЦИЯ --- прокрутка к кнопке
+  .when "прокрутить страницу к кнопке $button", (button) ->
+    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('.btn', button)).getWebElement())
   # --- НАВИГАЦИЯ --- обновить страницу
   .when "обновить страницу", ->
     browser.refresh()
@@ -84,9 +89,14 @@ module.exports = do ->
   .when 'очистить поле со значком, следующее после ярлыка "$label"', (label) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::p/input')).sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a")).then ->
       element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::p/input')).sendKeys(protractor.Key.BACK_SPACE)
+  .when 'очистить поле со значком, находящееся рядом с ярлыком "$label"', (label) ->
+    element(By.cssContainingText('label', label)).element(By.xpath('..')).$('input').sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a")).then ->
+      element(By.cssContainingText('label', label)).element(By.xpath('..')).$('input').sendKeys(protractor.Key.BACK_SPACE)
   # --- ФОРМА --- ввести значение
   .when 'ввести в поле со значком, следующее после ярлыка "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::p/input')).sendKeys(text)
+  .when 'ввести в поле со значком, находящееся рядом с ярлыком "$label" значение "$text"', (label, text) ->
+    element(By.cssContainingText('label', label)).element(By.xpath('..')).$('input').sendKeys(text)
   # --- ФОРМА --- ввести значение
   .when 'ввести в поле с плейсхолдером "$placeholder" значение "$text"', (placeholder, text) ->
     $("[placeholder='#{placeholder}']").sendKeys(text)
@@ -126,6 +136,9 @@ module.exports = do ->
   # --- ФОРМА --- открыть опции --- select2
   .when 'открыть select2 после ярлыка "$label"', (label) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::div/div/a')).click()
+  # --- ФОРМА --- открыть опции --- select2
+  .when 'открыть select2 рядом с ярлыком "$label"', (label) ->
+    element(By.cssContainingText('label', label)).element(By.xpath('..')).$$('a.select2-choice').click()
   # --- ФОРМА --- выбрать опцию --- select2
   .when 'выбрать опцию select2 "$option"', (option) ->
     element(By.cssContainingText('.ui-select-choices-row', option)).click()

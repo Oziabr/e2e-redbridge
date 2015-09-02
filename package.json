@@ -10,7 +10,8 @@
     "jasmine-spec-reporter": "^2.4.0"
   },
   "scripts": {
-    "test": "protractor conf.coffee"
+    "test": "protractor conf.coffee",
+    "console": "protractor conf.coffee --elementExplorer"
   },
   "author": "Yury Tvardovsky",
   "license": "MIT",
