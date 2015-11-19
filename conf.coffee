@@ -1,7 +1,7 @@
 exports.config =
   framework: 'jasmine2'
   specs: [ 'spec/*' ]
-  capabilities: 'browserName': 'chrome'
+  capabilities: 'browserName': 'firefox'
   # capabilities: 'browserName': 'phantomjs'
   directConnect: true
   jasmineNodeOpts:

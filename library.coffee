@@ -8,7 +8,7 @@ expect = chai.expect
 
 
 ###
-browser.driver.get('http://local.globalpas.com/')
+browser.driver.get('http://main.test.redbridge-arm.com')
 browser.driver.manage().window().setSize(1200,800)
 $("#loginform-username").sendKeys('test003')
 $("#loginform-password").sendKeys('test003')
@@ -48,9 +48,11 @@ module.exports = do ->
   .given "перейти $url", (url, cb) ->
     browser.driver.get url
   # --- НАВИГАЦИЯ --- логин
-  .given "залогиниться как $user с паролем $pass", (user, pass) ->
+  .given "заполнить поле с логином $user", (user) ->
     $("#loginform-username").sendKeys user
+  .given "заполнить поле с паролем $pass", (pass) ->
     $("#loginform-password").sendKeys pass
+  .given "залогиниться", ->
     $('[type="submit"]').click()
   # --- СЛУЖЕБНАЯ --- убрать тулбар
   .given "убрать тулбар", ->

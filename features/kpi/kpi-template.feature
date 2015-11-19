@@ -2,14 +2,16 @@
 Feature: Шаблоны KPI
 Background:
     Given установить окно 1200 x 800
-    #Given перейти http://tvardy.dev.globalpas.com
-    Given перейти http://local.globalpas.com
+    Given перейти http://main.test.redbridge-arm.com
+
 
 Scenario: Login&Setup
+
     Given залогиниться как test003 с паролем test003
 
 Scenario: Создание нового пользовательского KPI [Временной горизонт]
     When ткнуть в меню на KPI
+      And wait "250"
     When нажать на кнопку со значком plus
      And нажать на кнопку [Временной горизонт]
      And ввести в поле, следующее после ярлыка "Название шаблона" значение "уникальный-тестовый-идентификатор-шаблона"
