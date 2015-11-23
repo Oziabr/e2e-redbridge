@@ -9,7 +9,7 @@ var async = require('async');
 
 Yadda.plugins.jasmine.StepLevelPlugin.init();
 
-describe('KPI', function () {
+describe('Contracts', function () {
 
     new Yadda.FeatureFileSearch('features/contracts').each(function (file) {
         featureFile(file, function (feature) {
