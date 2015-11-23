@@ -40,7 +40,6 @@ module.exports = do ->
   .given "пишем $msg", (msg) ->
     console.log 'пишем сообщение в консоль', msg
 
-
   # --- НАВИГАЦИЯ --- размер окна
   .given "установить окно $width x $height", (width, height) ->
     browser.driver.manage().window().setSize (parseInt width), (parseInt height)
@@ -113,6 +112,9 @@ module.exports = do ->
   .when 'нажать на псевдо кнопку "$text"', (text) ->
     element(By.cssContainingText('a.btn', text)).click()
   # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку
+  .when 'нажать на кнопку в модальном окне "$text"', (text) ->
+    element(By.cssContainingText('.modal .btn', text)).click()
+  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на псевдо кнопку
   .when 'нажать на псевдо кнопку в модальном окне "$text"', (text) ->
     element(By.cssContainingText('.modal a.btn', text)).click()
   # --- ИНТЕРАКТИВ ->- ТАБЛИЦЫ --- нажать на кнопку
@@ -154,6 +156,25 @@ module.exports = do ->
     element(By.cssContainingText('tr', 'уникальный-тестовый-идентификатор-шаблона')).element(By.css('.fa-trash')).click()
 
 
+  #Костыли под календарь
+  # --- НАВИГАЦИЯ --- прокрутка к событию
+  .when 'прокрутить страницу к событию "$text"', (text) ->
+    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('div span.fc-title.ng-binding', text)).getWebElement())
+  # --- ИНТЕРАКТИВ --- нажать на событие календаря
+  .when 'нажать на событие календаря "$text"', (text) ->
+    element(By.cssContainingText('div span.fc-title.ng-binding', text)).click()
+  # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
+  .when 'нажать на кнопку в тултипе "$text"', (text) ->
+    element(By.cssContainingText('.btn-group a.btn', text)).click()
+  # --- ИНТЕРАКТИВ --- нажать на псевдо заголовок
+  .when 'нажать на псевдо заголовок "$text"', (text) ->
+    element(By.cssContainingText('h2 div.ng-scope', text)).click()
+  #--- ФОРМА --- ввести значение в текстовое поле псевдо заголовка
+  .when 'ввести в поле внутри псевдо заголовка значение "$text"', (text) ->
+    $('h2 input').sendKeys text
+  #--- ФОРМА --- ввести значение в текстовое поле textarea внутри label
+  .when 'ввести в текстовое поле внутри и после "$label" значение "$text"', (label, text) ->
+    element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label/textarea')).sendKeys text
 
 
   .then "нет модального окна", ->
