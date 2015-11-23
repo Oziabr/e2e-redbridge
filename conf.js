@@ -9,7 +9,7 @@ exports.config = {
     isVerbose: false,
     showColors: true,
     includeStackTrace: true,
-    defaultTimeoutInterval: 3000,
+    defaultTimeoutInterval: 10000,
     print: function() {}
   },
   onPrepare: function() {
