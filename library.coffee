@@ -40,6 +40,33 @@ module.exports = do ->
   .given "пишем $msg", (msg) ->
     console.log 'пишем сообщение в консоль', msg
 
+  # --- КОНТРОЛЬ --- пауза
+  .when "pause", ->
+    browser.pause()
+  .then "pause", ->
+    browser.pause()
+  # --- КОНТРОЛЬ --- ожидание
+  .when 'wait "$mil"', (mil) ->
+    browser.driver.sleep(parseInt mil)
+  .then 'wait "$mil"', (mil) ->
+    browser.driver.sleep(parseInt mil)
+
+  # --- ТАЙМЕР --- запуск таймера
+  .given "запуск таймера $label", (label) ->
+    console.time label
+  .when "запуск таймера $label", (label) ->
+    console.time label
+  .then "запуск таймера $label", (label) ->
+    console.time label
+  # --- ТАЙМЕР --- остановка таймера
+  .given "остановка таймера $label", (label) ->
+    console.timeEnd label
+  .when "остановка таймера $label", (label) ->
+    console.timeEnd label
+  .then "остановка таймера $label", (label) ->
+    console.timeEnd label
+
+
   # --- НАВИГАЦИЯ --- размер окна
   .given "установить окно $width x $height", (width, height) ->
     browser.driver.manage().window().setSize (parseInt width), (parseInt height)
@@ -147,22 +174,21 @@ module.exports = do ->
   .when 'выбрать опцию select2 "$option"', (option) ->
     element(By.cssContainingText('.ui-select-choices-row', option)).click()
 
-  .when "pause", ->
-    browser.pause()
-  .when 'wait "$mil"', (mil) ->
-    browser.driver.sleep(parseInt mil)
 
   .when 'удалить', ->
     element(By.cssContainingText('tr', 'уникальный-тестовый-идентификатор-шаблона')).element(By.css('.fa-trash')).click()
 
 
   #Костыли под календарь
+  # --- ИНТЕРАКТИВ --- нажать на смолбокс с текстом
+  .when 'нажать на смолбокс с текстом "$text"', (text) ->
+    element(By.cssContainingText('.SmallBox', text)).click()
   # --- НАВИГАЦИЯ --- прокрутка к событию
   .when 'прокрутить страницу к событию "$text"', (text) ->
-    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('div span.fc-title.ng-binding', text)).getWebElement())
+    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('div.fc-content span.fc-title', text)).getWebElement())
   # --- ИНТЕРАКТИВ --- нажать на событие календаря
   .when 'нажать на событие календаря "$text"', (text) ->
-    element(By.cssContainingText('div span.fc-title.ng-binding', text)).click()
+    element(By.cssContainingText('div.fc-content span.fc-title', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
   .when 'нажать на кнопку в тултипе "$text"', (text) ->
     element(By.cssContainingText('.btn-group a.btn', text)).click()
@@ -176,7 +202,7 @@ module.exports = do ->
   .when 'ввести в текстовое поле внутри и после "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label/textarea')).sendKeys text
 
-
+  #Проверки
   .then "нет модального окна", ->
     $$('.modal').count().then (count) ->
       expect(count).to.be.equal 0
@@ -210,8 +236,5 @@ module.exports = do ->
       .getText()
       .then (text) ->
         (expect text).to.be.equal msg
-
-  .then "pause", ->
-    browser.pause()
 
   library
