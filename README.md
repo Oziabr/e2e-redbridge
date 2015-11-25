@@ -46,14 +46,3 @@ http://acuminous.gitbooks.io/yadda-user-guide/content/en/index.html
 
 * прикрутить репортер
 * перебрать структуру (разнести библиотеку по разным файлам в отдельном каталоге)
-
-# Обновление сервера
-git pull
-
-git checkout 'название ветки'
-
-/var/www/main.test.redbridge-arm.com/htdocs/config/db* config/
-
-sudo cp -r ./* /var/www/main.test.redbridge-arm.com/htdocs/
-
-sudo chown www-data:www-data -R /var/www/main.test.redbridge-arm.com/htdocs/
