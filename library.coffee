@@ -97,7 +97,14 @@ module.exports = do ->
     browser.refresh()
   # --- САЙТ --- меню
   .when "ткнуть в меню на $item", (item) ->
-    element(By.cssContainingText('.menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li a > .menu-item-parent', item)).click()
+  # --- САЙТ --- раскрытое меню
+  .when "ткнуть в меню второго уровня на $item", (item) ->
+    element(By.cssContainingText('nav > ul > li > ul > li > a .menu-item-parent', item)).click()
+  .when "ткнуть в меню третьего уровня на $item", (item) ->
+    element(By.cssContainingText('nav > ul > li > ul > li ul > li > a .menu-item-parent', item)).click()
+  .when "ткнуть в меню четвертого уровня на $item", (item) ->
+    element(By.cssContainingText('nav > ul > li > ul > li ul > li > ul > li > a .menu-item-parent', item)).click()
   # --- СЛУЖЕБНАЯ --- выключить сообщения
   .when "погасить все сообщения", ->
     $$('.foto').click()
