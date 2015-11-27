@@ -125,7 +125,7 @@ module.exports = do ->
   .when 'ввести в поле, следующее после ярлыка "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
   # --- ФОРМА --- ввести значение в поле внутри label
-  .when 'ввести в поле внутри ярлыка, после "$label" значение "$text"', (label, text) ->
+  .when 'ввести в поле внутри ярлыка рядом с "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
 
   # --- ФОРМА --- очистить значение
@@ -217,15 +217,26 @@ module.exports = do ->
   .when 'ввести в текстовой блок внутри ярлыка, после "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label/textarea')).sendKeys text
 
-  #Костыли под мои компании
-  # --- ИНТЕРАКТИВ --- нажать на результат поиска
-  .when 'нажать на результат поиска "$text"', (text) ->
-    element(By.cssContainingText('.cal-list-event a > b.ng-binding', text)).click()
+  #Костыли под Мои компании
+  # --- ИНТЕРАКТИВ --- нажать на результат поиска компаний
+  .when 'нажать на результат поиска компаний "$text"', (text) ->
+    element(By.cssContainingText('a > b.ng-binding', text)).click()
   # --- ИНТЕРАКТИВ --- переход по табам
   .when 'перейти на вкладку "$text"', (text) ->
     element(By.cssContainingText('.company-tabs li > a', text)).click()
   # --- ИНТЕРАКТИВ --- переход на скрытые табы
 
+  #Костыли под Пользователи
+  #--- ФОРМА --- ввести значение в текстовой блок (textarea) внутри label
+  .when 'ввести в поле внутри ярлыка, после "$label" значение "$text"', (label, text) ->
+    element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label/input')).sendKeys text
+  # --- ИНТЕРАКТИВ --- нажать на результат поиска пользователей
+  .when 'нажать на результат поиска пользователей "$text"', (text) ->
+    element(By.cssContainingText('a.ng-binding', text)).click()
+  #Костыли под Товары
+  # --- ФОРМА --- ввести значение
+  .when 'ввести в дополнительное поле с иконкой "$ico" текст "$text"', (ico, text) ->
+    $(".input-group-addon .glyphicon-#{ico}").element(By.xpath('../following-sibling::input')).sendKeys(text)
   #Проверки
   .then "нет модального окна", ->
     $$('.modal').count().then (count) ->
