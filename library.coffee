@@ -13,6 +13,7 @@ browser.driver.manage().window().setSize(1200,800)
 $("#loginform-username").sendKeys('test003')
 $("#loginform-password").sendKeys('test003')
 $('[type="submit"]').click()
+
 element(By.cssContainingText('.menu-item-parent', 'KPI')).click()
 element.all(By.cssContainingText('tr', 'уникальный')).filter(function(el, index) {return el.getText().then(function(text) {return text == 'уникальный-тестовый-идентификатор-шаблона Годовой'}) }).getText()
 element.all(By.cssContainingText('tr', 'уникальный-тестовый-идентификатор-шаблона')).filter(function(el, index) {return el.getText().then(function(text) {return text == 'уникальный-тестовый-идентификатор-шаблона Годовой'}) }).getWebElements().length
@@ -95,16 +96,18 @@ module.exports = do ->
   # --- НАВИГАЦИЯ --- обновить страницу
   .when "обновить страницу", ->
     browser.refresh()
+
   # --- САЙТ --- меню
   .when "ткнуть в меню на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li a > .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li > a > .menu-item-parent', item)).click()
   # --- САЙТ --- раскрытое меню
   .when "ткнуть в меню второго уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li > a .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li > ul > li > a > .menu-item-parent', item)).click()
   .when "ткнуть в меню третьего уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li ul > li > a .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li > ul > li ul > li > a > .menu-item-parent', item)).click()
   .when "ткнуть в меню четвертого уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li ul > li > ul > li > a .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li > ul > li ul > li > ul > li > a > .menu-item-parent', item)).click()
+
   # --- СЛУЖЕБНАЯ --- выключить сообщения
   .when "погасить все сообщения", ->
     $$('.foto').click()
@@ -117,9 +120,14 @@ module.exports = do ->
   # --- ИНТЕРАКТИВ --- нажать на кнопку
   .when "нажать на кнопку $text", (text) ->
     element(By.cssContainingText('.btn', text)).click()
-  # --- ФОРМА --- ввести значение
+
+  # --- ФОРМА --- ввести значение в поле
   .when 'ввести в поле, следующее после ярлыка "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
+  # --- ФОРМА --- ввести значение в поле внутри label
+  .when 'ввести в поле внутри ярлыка, после "$label" значение "$text"', (label, text) ->
+    element(By.cssContainingText('label label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
+
   # --- ФОРМА --- очистить значение
   .when 'очистить поле со значком, следующее после ярлыка "$label"', (label) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::p/input')).sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a")).then ->
@@ -192,22 +200,31 @@ module.exports = do ->
     element(By.cssContainingText('.SmallBox', text)).click()
   # --- НАВИГАЦИЯ --- прокрутка к событию
   .when 'прокрутить страницу к событию "$text"', (text) ->
-    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('div.fc-content span.fc-title', text)).getWebElement())
+    browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('span.fc-title', text)).getWebElement())
   # --- ИНТЕРАКТИВ --- нажать на событие календаря
   .when 'нажать на событие календаря "$text"', (text) ->
-    element(By.cssContainingText('div.fc-content span.fc-title', text)).click()
+    element(By.cssContainingText('span.fc-title', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
   .when 'нажать на кнопку в тултипе "$text"', (text) ->
-    element(By.cssContainingText('.btn-group a.btn', text)).click()
+    element(By.cssContainingText('.tooltip a.btn', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на псевдо заголовок
   .when 'нажать на псевдо заголовок "$text"', (text) ->
     element(By.cssContainingText('h2 div.ng-scope', text)).click()
   #--- ФОРМА --- ввести значение в текстовое поле псевдо заголовка
   .when 'ввести в поле внутри псевдо заголовка значение "$text"', (text) ->
     $('h2 input').sendKeys text
-  #--- ФОРМА --- ввести значение в текстовое поле textarea внутри label
-  .when 'ввести в текстовое поле внутри и после "$label" значение "$text"', (label, text) ->
+  #--- ФОРМА --- ввести значение в текстовой блок (textarea) внутри label
+  .when 'ввести в текстовой блок внутри ярлыка, после "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label/textarea')).sendKeys text
+
+  #Костыли под мои компании
+  # --- ИНТЕРАКТИВ --- нажать на результат поиска
+  .when 'нажать на результат поиска "$text"', (text) ->
+    element(By.cssContainingText('.cal-list-event a > b.ng-binding', text)).click()
+  # --- ИНТЕРАКТИВ --- переход по табам
+  .when 'перейти на вкладку "$text"', (text) ->
+    element(By.cssContainingText('.company-tabs li > a', text)).click()
+  # --- ИНТЕРАКТИВ --- переход на скрытые табы
 
   #Проверки
   .then "нет модального окна", ->
