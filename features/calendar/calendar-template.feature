@@ -9,7 +9,7 @@ Scenario: Login&Setup
     Given запуск таймера Setup
     Given установить окно 1200 x 800
     And перейти about:blank
-    And перейти http://main.test.redbridge-arm.com/
+    And перейти http://kolomytsev-pre-presentation-dev.ext.redbridge-arm.com/
     And заполнить поле с логином test003
     And заполнить поле с паролем test003
     Given запуск таймера Login
