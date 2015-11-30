@@ -102,11 +102,11 @@ module.exports = do ->
     element(By.cssContainingText('nav > ul > li > a > .menu-item-parent', item)).click()
   # --- САЙТ --- раскрытое меню
   .when "ткнуть в меню второго уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li > a > .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
   .when "ткнуть в меню третьего уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li ul > li > a > .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
   .when "ткнуть в меню четвертого уровня на $item", (item) ->
-    element(By.cssContainingText('nav > ul > li > ul > li ul > li > ul > li > a > .menu-item-parent', item)).click()
+    element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
 
   # --- СЛУЖЕБНАЯ --- выключить сообщения
   .when "погасить все сообщения", ->
@@ -118,6 +118,9 @@ module.exports = do ->
   .when "нажать на кнопку со значком $ico", (ico) ->
     $("a i.fa-#{ico}").click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку
+  .when "нажать на значок $ico", (ico) ->
+    $("span i.fa-#{ico}").click()
+  # --- ИНТЕРАКТИВ --- нажать на кнопку
   .when "нажать на кнопку $text", (text) ->
     element(By.cssContainingText('.btn', text)).click()
 
@@ -127,6 +130,9 @@ module.exports = do ->
   # --- ФОРМА --- ввести значение в поле внутри label
   .when 'ввести в поле внутри ярлыка рядом с "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
+  # --- ФОРМА --- нажать чекбокс
+  .when 'нажать на чекбокс "$label"', (label) ->
+    element(By.cssContainingText('.checkbox', label)).click()
 
   # --- ФОРМА --- очистить значение
   .when 'очистить поле со значком, следующее после ярлыка "$label"', (label) ->
@@ -237,7 +243,13 @@ module.exports = do ->
   # --- ФОРМА --- ввести значение
   .when 'ввести в дополнительное поле с иконкой "$ico" текст "$text"', (ico, text) ->
     $(".input-group-addon .glyphicon-#{ico}").element(By.xpath('../following-sibling::input')).sendKeys(text)
+
   #Проверки
+  # ---  ОШИБКИ --- проверка на наличие ошибок
+  .then "нет ошибок", ->
+    $$('.site-error').count().then (count) ->
+      expect(count).to.be.equal 0
+
   .then "нет модального окна", ->
     $$('.modal').count().then (count) ->
       expect(count).to.be.equal 0
