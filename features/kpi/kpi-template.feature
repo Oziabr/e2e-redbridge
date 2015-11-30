@@ -1,17 +1,20 @@
 @goodRead=http://hackersome.com/p/shazam/yadda
 Feature: Шаблоны KPI
-Background:
-    Given установить окно 1200 x 800
-    Given перейти http://main.test.redbridge-arm.com
-
+# Background:
+#     Given установить окно 1200 x 800
+#     Given перейти http://main.test.redbridge-arm.com
 
 Scenario: Login&Setup
-
-    Given залогиниться как test003 с паролем test003
+    Given установить окно 1200 x 800
+    And перейти about:blank
+    And перейти http://main.test.redbridge-arm.com
+    And заполнить поле с логином test003
+    And заполнить поле с паролем test003
+    And залогиниться
 
 Scenario: Создание нового пользовательского KPI [Временной горизонт]
     When ткнуть в меню на KPI
-    And wait "250"
+    When wait "750"
     When нажать на кнопку со значком plus
     And нажать на кнопку [Временной горизонт]
     And ввести в поле, следующее после ярлыка "Название шаблона" значение "уникальный-тестовый-идентификатор-шаблона"
@@ -44,6 +47,7 @@ Examples:
 
 Scenario: Неудачное создание нового пользовательского KPI без названия
     When ткнуть в меню на KPI
+    When wait "750"
     When нажать на кнопку со значком plus
     And нажать на кнопку [Временной горизонт]
     And нажать на псевдо кнопку "Создать и остаться в списке"

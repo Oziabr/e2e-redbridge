@@ -15,6 +15,7 @@ Scenario: Login&Setup
 Scenario: Переход на раздел Товары и проверка его наличия
     When запуск таймера Move
     When ткнуть в меню на Товары
+    When wait "750"
     And ткнуть в меню второго уровня на Товары
     Then остановка таймера Move
     Then wait "3000"
