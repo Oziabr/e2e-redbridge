@@ -84,7 +84,6 @@ module.exports = do ->
   # --- СЛУЖЕБНАЯ --- убрать тулбар
   .given "убрать тулбар", ->
     $('.yii-debug-toolbar-toggler').click()
-
   # --- НАВИГАЦИЯ --- прокрутка
   .when "прокрутить страницу вниз", ->
     browser.executeScript('window.scrollTo(0,document.body.scrollHeight);')
@@ -114,16 +113,30 @@ module.exports = do ->
   # --- САЙТ --- переход по ссылке
   .when 'нажать на ссылку "$text"', (text) ->
     element(By.cssContainingText('a', text)).click()
+
+
   # --- ИНТЕРАКТИВ --- нажать на кнопку
-  .when "нажать на кнопку со значком $ico", (ico) ->
-    $("a i.fa-#{ico}").click()
+  .when "нажать на кнопку $text", (text) ->
+    element(By.cssContainingText('button.btn', text)).click()
+  # --- ИНТЕРАКТИВ --- нажать на кнопку
+  .when 'нажать на псевдо кнопку "$text"', (text) ->
+    element(By.cssContainingText('a.btn', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку
   .when "нажать на значок $ico", (ico) ->
     $("span i.fa-#{ico}").click()
-  # --- ИНТЕРАКТИВ --- нажать на кнопку
-  .when "нажать на кнопку $text", (text) ->
-    element(By.cssContainingText('.btn', text)).click()
+    # --- ИНТЕРАКТИВ --- нажать на кнопку со значком
+  .when "нажать на кнопку со значком $ico", (ico) ->
+      $("a i.fa-#{ico}").click()
+  # --- ИНТЕРАКТИВ --- нажать на кнопку с глификоном
+  .when "нажать на кнопку с глификоном $glyphicon", (glyphicon) ->
+    $("button .glyphicon.glyphicon-#{glyphicon}").click()
 
+  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку
+  .when 'нажать на кнопку в модальном окне "$text"', (text) ->
+    element(By.cssContainingText('.modal .btn', text)).click()
+  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на псевдо кнопку
+  .when 'нажать на псевдо кнопку в модальном окне "$text"', (text) ->
+    element(By.cssContainingText('.modal a.btn', text)).click()
   # --- ФОРМА --- ввести значение в поле
   .when 'ввести в поле, следующее после ярлыка "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
@@ -133,7 +146,6 @@ module.exports = do ->
   # --- ФОРМА --- нажать чекбокс
   .when 'нажать на чекбокс "$label"', (label) ->
     element(By.cssContainingText('.checkbox', label)).click()
-
   # --- ФОРМА --- очистить значение
   .when 'очистить поле со значком, следующее после ярлыка "$label"', (label) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::p/input')).sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a")).then ->
@@ -155,16 +167,6 @@ module.exports = do ->
   # !!! ФОРМА !!! ввести значение
   .when 'ввести в поле, следующее после не ярлыка _в_модуле_user_ "$label" значение "$text"', (label, text) ->
     element(By.cssContainingText('.smart-form p', label)).element(By.xpath('following-sibling::div')).$('input').sendKeys(text)
-
-  # --- ИНТЕРАКТИВ --- нажать на кнопку
-  .when 'нажать на псевдо кнопку "$text"', (text) ->
-    element(By.cssContainingText('a.btn', text)).click()
-  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку
-  .when 'нажать на кнопку в модальном окне "$text"', (text) ->
-    element(By.cssContainingText('.modal .btn', text)).click()
-  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на псевдо кнопку
-  .when 'нажать на псевдо кнопку в модальном окне "$text"', (text) ->
-    element(By.cssContainingText('.modal a.btn', text)).click()
   # --- ИНТЕРАКТИВ ->- ТАБЛИЦЫ --- нажать на кнопку
   .when 'нажать на кнопку со значком "$ico" в строке таблицы с полем "$search"', (ico, search) ->
     element(By.cssContainingText('tr', search)).element(By.css(".fa-#{ico}")).click()
