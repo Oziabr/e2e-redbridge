@@ -33,18 +33,18 @@ module.exports = do ->
   #library = new (Yadda.localisation.English.library)(dictionary)
   library = new (Yadda.localisation.English.library)()
 
-  .given "тихо исполняем $msg", (msg) ->
+  .given 'тихо исполняем $msg', (msg) ->
     return
-  .given "пишем с задержкой $msg", (msg) ->
+  .given 'пишем с задержкой $msg', (msg) ->
     browser.driver.sleep(1000).then ->
       console.log 'пишем сообщение в консоль', msg
-  .given "пишем $msg", (msg) ->
+  .given 'пишем $msg', (msg) ->
     console.log 'пишем сообщение в консоль', msg
 
   # --- КОНТРОЛЬ --- пауза
-  .when "pause", ->
+  .when 'pause', ->
     browser.pause()
-  .then "pause", ->
+  .then 'pause', ->
     browser.pause()
   # --- КОНТРОЛЬ --- ожидание
   .when 'wait "$mil"', (mil) ->
@@ -53,62 +53,62 @@ module.exports = do ->
     browser.driver.sleep(parseInt mil)
 
   # --- ТАЙМЕР --- запуск таймера
-  .given "запуск таймера $label", (label) ->
+  .given 'запуск таймера "$label"', (label) ->
     console.time label
-  .when "запуск таймера $label", (label) ->
+  .when 'запуск таймера "$label"', (label) ->
     console.time label
-  .then "запуск таймера $label", (label) ->
+  .then 'запуск таймера "$label"', (label) ->
     console.time label
   # --- ТАЙМЕР --- остановка таймера
-  .given "остановка таймера $label", (label) ->
+  .given 'остановка таймера "$label"', (label) ->
     console.timeEnd label
-  .when "остановка таймера $label", (label) ->
+  .when 'остановка таймера "$label"', (label) ->
     console.timeEnd label
-  .then "остановка таймера $label", (label) ->
+  .then 'остановка таймера "$label"', (label) ->
     console.timeEnd label
 
 
   # --- НАВИГАЦИЯ --- размер окна
-  .given "установить окно $width x $height", (width, height) ->
+  .given 'установить окно $width x $height', (width, height) ->
     browser.driver.manage().window().setSize (parseInt width), (parseInt height)
   # --- НАВИГАЦИЯ --- переход к URL
-  .given "перейти $url", (url, cb) ->
+  .given 'перейти на $url', (url, cb) ->
     browser.driver.get url
   # --- НАВИГАЦИЯ --- логин
-  .given "заполнить поле с логином $user", (user) ->
+  .given 'заполнить поле с логином "$user"', (user) ->
     $("#loginform-username").sendKeys user
-  .given "заполнить поле с паролем $pass", (pass) ->
+  .given 'заполнить поле с паролем "$pass"', (pass) ->
     $("#loginform-password").sendKeys pass
-  .given "залогиниться", ->
+  .given 'залогиниться', ->
     $('[type="submit"]').click()
   # --- СЛУЖЕБНАЯ --- убрать тулбар
-  .given "убрать тулбар", ->
+  .given 'убрать тулбар', ->
     $('.yii-debug-toolbar-toggler').click()
   # --- НАВИГАЦИЯ --- прокрутка
-  .when "прокрутить страницу вниз", ->
+  .when 'прокрутить страницу вниз', ->
     browser.executeScript('window.scrollTo(0,document.body.scrollHeight);')
-  .when "прокрутить страницу вверх", ->
+  .when 'прокрутить страницу вверх', ->
     browser.executeScript('window.scrollTo(0,0);')
   # --- НАВИГАЦИЯ --- прокрутка к кнопке
-  .when "прокрутить страницу к кнопке $button", (button) ->
+  .when 'прокрутить страницу к кнопке "$button"', (button) ->
     browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('.btn', button)).getWebElement())
   # --- НАВИГАЦИЯ --- обновить страницу
-  .when "обновить страницу", ->
+  .when 'обновить страницу', ->
     browser.refresh()
 
   # --- САЙТ --- меню
-  .when "ткнуть в меню на $item", (item) ->
+  .when 'ткнуть в меню на "$item"', (item) ->
     element(By.cssContainingText('nav > ul > li > a > .menu-item-parent', item)).click()
   # --- САЙТ --- раскрытое меню
-  .when "ткнуть в меню второго уровня на $item", (item) ->
+  .when 'ткнуть в меню второго уровня на "$item"', (item) ->
     element(By.cssContainingText('nav > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
-  .when "ткнуть в меню третьего уровня на $item", (item) ->
+  .when 'ткнуть в меню третьего уровня на "$item"', (item) ->
     element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
-  .when "ткнуть в меню четвертого уровня на $item", (item) ->
+  .when 'ткнуть в меню четвертого уровня на "$item"', (item) ->
     element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click()
 
   # --- СЛУЖЕБНАЯ --- выключить сообщения
-  .when "погасить все сообщения", ->
+  .when 'погасить все сообщения', ->
     $$('.foto').click()
   # --- САЙТ --- переход по ссылке
   .when 'нажать на ссылку "$text"', (text) ->
@@ -116,19 +116,22 @@ module.exports = do ->
 
 
   # --- ИНТЕРАКТИВ --- нажать на кнопку
-  .when "нажать на кнопку $text", (text) ->
+  .when 'нажать на кнопку "$text"', (text) ->
     element(By.cssContainingText('button.btn', text)).click()
+  # --- ИНТЕРАКТИВ --- нажать на типо кнопку
+  .when 'нажать на типо кнопку "$text"', (text) ->
+    element(By.cssContainingText('.btn', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку
   .when 'нажать на псевдо кнопку "$text"', (text) ->
     element(By.cssContainingText('a.btn', text)).click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку
-  .when "нажать на значок $ico", (ico) ->
+  .when 'нажать на значок $ico', (ico) ->
     $("span i.fa-#{ico}").click()
     # --- ИНТЕРАКТИВ --- нажать на кнопку со значком
-  .when "нажать на кнопку со значком $ico", (ico) ->
+  .when 'нажать на кнопку со значком $ico', (ico) ->
       $("a i.fa-#{ico}").click()
   # --- ИНТЕРАКТИВ --- нажать на кнопку с глификоном
-  .when "нажать на кнопку с глификоном $glyphicon", (glyphicon) ->
+  .when 'нажать на кнопку с глификоном $glyphicon', (glyphicon) ->
     $("button .glyphicon.glyphicon-#{glyphicon}").click()
 
   # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку

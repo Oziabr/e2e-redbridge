@@ -31,73 +31,75 @@ element(By.cssContainingText('a', 'Список шаблонов KPI')).click()
 
 module.exports = (function() {
   var library;
-  library = new Yadda.localisation.English.library().given("тихо исполняем $msg", function(msg) {}).given("пишем с задержкой $msg", function(msg) {
+  library = new Yadda.localisation.English.library().given('тихо исполняем $msg', function(msg) {}).given('пишем с задержкой $msg', function(msg) {
     return browser.driver.sleep(1000).then(function() {
       return console.log('пишем сообщение в консоль', msg);
     });
-  }).given("пишем $msg", function(msg) {
+  }).given('пишем $msg', function(msg) {
     return console.log('пишем сообщение в консоль', msg);
-  }).when("pause", function() {
+  }).when('pause', function() {
     return browser.pause();
-  }).then("pause", function() {
+  }).then('pause', function() {
     return browser.pause();
   }).when('wait "$mil"', function(mil) {
     return browser.driver.sleep(parseInt(mil));
   }).then('wait "$mil"', function(mil) {
     return browser.driver.sleep(parseInt(mil));
-  }).given("запуск таймера $label", function(label) {
+  }).given('запуск таймера "$label"', function(label) {
     return console.time(label);
-  }).when("запуск таймера $label", function(label) {
+  }).when('запуск таймера "$label"', function(label) {
     return console.time(label);
-  }).then("запуск таймера $label", function(label) {
+  }).then('запуск таймера "$label"', function(label) {
     return console.time(label);
-  }).given("остановка таймера $label", function(label) {
+  }).given('остановка таймера "$label"', function(label) {
     return console.timeEnd(label);
-  }).when("остановка таймера $label", function(label) {
+  }).when('остановка таймера "$label"', function(label) {
     return console.timeEnd(label);
-  }).then("остановка таймера $label", function(label) {
+  }).then('остановка таймера "$label"', function(label) {
     return console.timeEnd(label);
-  }).given("установить окно $width x $height", function(width, height) {
+  }).given('установить окно $width x $height', function(width, height) {
     return browser.driver.manage().window().setSize(parseInt(width), parseInt(height));
-  }).given("перейти $url", function(url, cb) {
+  }).given('перейти на $url', function(url, cb) {
     return browser.driver.get(url);
-  }).given("заполнить поле с логином $user", function(user) {
+  }).given('заполнить поле с логином "$user"', function(user) {
     return $("#loginform-username").sendKeys(user);
-  }).given("заполнить поле с паролем $pass", function(pass) {
+  }).given('заполнить поле с паролем "$pass"', function(pass) {
     return $("#loginform-password").sendKeys(pass);
-  }).given("залогиниться", function() {
+  }).given('залогиниться', function() {
     return $('[type="submit"]').click();
-  }).given("убрать тулбар", function() {
+  }).given('убрать тулбар', function() {
     return $('.yii-debug-toolbar-toggler').click();
-  }).when("прокрутить страницу вниз", function() {
+  }).when('прокрутить страницу вниз', function() {
     return browser.executeScript('window.scrollTo(0,document.body.scrollHeight);');
-  }).when("прокрутить страницу вверх", function() {
+  }).when('прокрутить страницу вверх', function() {
     return browser.executeScript('window.scrollTo(0,0);');
-  }).when("прокрутить страницу к кнопке $button", function(button) {
+  }).when('прокрутить страницу к кнопке "$button"', function(button) {
     return browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('.btn', button)).getWebElement());
-  }).when("обновить страницу", function() {
+  }).when('обновить страницу', function() {
     return browser.refresh();
-  }).when("ткнуть в меню на $item", function(item) {
+  }).when('ткнуть в меню на "$item"', function(item) {
     return element(By.cssContainingText('nav > ul > li > a > .menu-item-parent', item)).click();
-  }).when("ткнуть в меню второго уровня на $item", function(item) {
+  }).when('ткнуть в меню второго уровня на "$item"', function(item) {
     return element(By.cssContainingText('nav > ul > li.open > ul > li > a > .menu-item-parent', item)).click();
-  }).when("ткнуть в меню третьего уровня на $item", function(item) {
+  }).when('ткнуть в меню третьего уровня на "$item"', function(item) {
     return element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click();
-  }).when("ткнуть в меню четвертого уровня на $item", function(item) {
+  }).when('ткнуть в меню четвертого уровня на "$item"', function(item) {
     return element(By.cssContainingText('nav > ul > li.open > ul > li.open > ul > li.open > ul > li > a > .menu-item-parent', item)).click();
-  }).when("погасить все сообщения", function() {
+  }).when('погасить все сообщения', function() {
     return $$('.foto').click();
   }).when('нажать на ссылку "$text"', function(text) {
     return element(By.cssContainingText('a', text)).click();
-  }).when("нажать на кнопку $text", function(text) {
+  }).when('нажать на кнопку "$text"', function(text) {
     return element(By.cssContainingText('button.btn', text)).click();
+  }).when('нажать на типо кнопку "$text"', function(text) {
+    return element(By.cssContainingText('.btn', text)).click();
   }).when('нажать на псевдо кнопку "$text"', function(text) {
     return element(By.cssContainingText('a.btn', text)).click();
-  }).when("нажать на значок $ico", function(ico) {
+  }).when('нажать на значок $ico', function(ico) {
     return $("span i.fa-" + ico).click();
-  }).when("нажать на кнопку со значком $ico", function(ico) {
+  }).when('нажать на кнопку со значком $ico', function(ico) {
     return $("a i.fa-" + ico).click();
-  }).when("нажать на кнопку с глификоном $glyphicon", function(glyphicon) {
+  }).when('нажать на кнопку с глификоном $glyphicon', function(glyphicon) {
     return $("button .glyphicon.glyphicon-" + glyphicon).click();
   }).when('нажать на кнопку в модальном окне "$text"', function(text) {
     return element(By.cssContainingText('.modal .btn', text)).click();
