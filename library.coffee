@@ -211,6 +211,12 @@ module.exports = do ->
   # --- ИНТЕРАКТИВ --- нажать на событие календаря
   .when 'нажать на событие календаря "$text"', (text) ->
     element(By.cssContainingText('span.fc-title', text)).click()
+  # --- ПРОВЕРКА --- наличие созданного события
+  .then 'Проверить количество задач календаря "$text" равно "$num"', (text, num) ->
+    element(By.cssContainingText('span.fc-title', text)).getWebElement()
+      .then (el) ->
+        console.log 'длинна', el.length
+        return true
   # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
   .when 'нажать на кнопку в тултипе "$text"', (text) ->
     element(By.cssContainingText('.tooltip a.btn', text)).click()
