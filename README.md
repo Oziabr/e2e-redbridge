@@ -42,6 +42,10 @@ http://angular.github.io/protractor/#/
 
 http://acuminous.gitbooks.io/yadda-user-guide/content/en/index.html
 
+### описание языка и сценариев
+https://cucumber.io/docs/reference
+
+
 # ToDo
 
 * прикрутить репортер
