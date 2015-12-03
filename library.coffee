@@ -212,7 +212,7 @@ module.exports = do ->
   .when 'нажать на событие календаря "$text"', (text) ->
     element(By.cssContainingText('span.fc-title', text)).click()
   # --- ПРОВЕРКА --- наличие созданного события
-  .then 'Проверить количество задач календаря "$text" равно "$num"', (text, num) ->
+  .then 'проверить количество задач календаря "$text" равно "$num"', (text, num) ->
     element(By.cssContainingText('span.fc-title', text)).getWebElement()
       .then (el) ->
         console.log 'длинна', el.length
