@@ -215,7 +215,7 @@ module.exports = do ->
   .then 'проверить количество задач календаря "$text" равно "$num"', (text, num) ->
     element(By.cssContainingText('span.fc-title', text)).getWebElement()
       .then (el) ->
-        console.log 'длинна', el.length
+        console.log 'длина', el.length
         return true
   # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
   .when 'нажать на кнопку в тултипе "$text"', (text) ->
