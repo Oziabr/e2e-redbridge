@@ -27,7 +27,6 @@ element(By.cssContainingText('a', 'Список шаблонов KPI')).click()
 
 ###
 
-
 module.exports = do ->
   #dictionary = (new (Yadda.Dictionary)).define('LOCALE', /(fr|es|ie)/).define('NUM', /(\d+)/)
   #library = new (Yadda.localisation.English.library)(dictionary)
@@ -66,7 +65,6 @@ module.exports = do ->
     console.timeEnd label
   .then 'остановка таймера "$label"', (label) ->
     console.timeEnd label
-
 
   # --- НАВИГАЦИЯ --- размер окна
   .given 'установить окно $width x $height', (width, height) ->
