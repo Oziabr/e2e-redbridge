@@ -200,10 +200,8 @@ module.exports = do ->
   .when 'выбрать опцию select2 "$option"', (option) ->
     element(By.cssContainingText('.ui-select-choices-row', option)).click()
 
-
   .when 'удалить', ->
     element(By.cssContainingText('tr', 'уникальный-тестовый-идентификатор-шаблона')).element(By.css('.fa-trash')).click()
-
 
   #Костыли под календарь
   # --- ИНТЕРАКТИВ --- нажать на смолбокс с текстом
