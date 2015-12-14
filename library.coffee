@@ -322,6 +322,10 @@ module.exports = do ->
   .when 'заполнить "$text" в поле-спинер в блоке товара "$title"', (text, title) ->
     element(By.cssContainingText('.good-container', title)).$('.ui-spinner input').sendKeys(text)
 
+  # --- ФОРМА --- ввести число в поле в блоке
+  .when 'в блоке товара "$title" ввести число "$number"
+  в строке таблицы с полем "$search"', (title, number, search) ->
+    element(By.cssContainingText('.good-container', title)).element(By.cssContainingText('tr', search)).$('input[type="number"]').sendKeys(number)
 
   # --- ФОРМА--- select2 после лейбла
   .when 'открыть в расширенном поиске select2 после ярлыка "$label"', (label) ->
