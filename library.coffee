@@ -87,6 +87,26 @@ module.exports = do ->
   .when 'прокрутить страницу к кнопке "$button"', (button) ->
     browser.executeScript("arguments[0].scrollIntoView();", element(By.cssContainingText('.btn', button)).getWebElement())
 
+  # --- НАВИГАЦИЯ --- переход по табам
+  .when 'перейти на вкладку "$text"', (text) ->
+    element(By.cssContainingText('.nav li > a', text)).click()
+
+  # --- НАВИГАЦИЯ --- переход на скрытые табы
+  .when 'перейти на скрытую вкладку "$text"', (text) ->
+    element(By.cssContainingText('.dropdown.open a', text)).click()
+
+  # --- НАВИГАЦИЯ --- переход по первой ссылке первого ряда таблицы
+  .when 'перейти по первой ссылке первого ряда таблицы', () ->
+    $('table tr td a').click()
+
+  # --- НАВИГАЦИЯ --- переход по первому полю первого ряда таблицы
+  .when 'перейти по первому полю первого ряда таблицы', () ->
+    $('table tr td').click()
+
+  # --- НАВИГАЦИЯ --- переход по первой ссылке первого блока
+  .when 'переход по первой ссылке первого блока', () ->
+    $('.well a').click()
+
   # --- НАВИГАЦИЯ --- обновить страницу
   .when 'обновить страницу', ->
     browser.refresh()
@@ -252,16 +272,12 @@ module.exports = do ->
     $('h2 input').sendKeys(text)
 
 
+
   # -- МОИ КОМПАНИИ ---
 
   # --- ИНТЕРАКТИВ --- нажать на результат поиска компаний
   .when 'нажать на результат поиска компаний "$text"', (text) ->
     element(By.cssContainingText('a > b.ng-binding', text)).click()
-  # --- ИНТЕРАКТИВ --- переход по табам
-  .when 'перейти на вкладку "$text"', (text) ->
-    element(By.cssContainingText('.company-tabs li > a', text)).click()
-  # --- ИНТЕРАКТИВ --- переход на скрытые табы
-
 
   # --- ПОЛЬЗОВАТЕЛИ ---
 
