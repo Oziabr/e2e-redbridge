@@ -3,6 +3,10 @@ exports.config =
   specs: [ 'spec/*' ]
   capabilities: 'browserName': 'firefox'
   # capabilities: 'browserName': 'phantomjs'
+  # loggingPrefs:
+  #   'driver': 'SEVERE'
+  #   'server': 'SEVERE'
+  #   'browser': 'SEVERE'
   directConnect: true
   jasmineNodeOpts:
     isVerbose: false

@@ -9,6 +9,33 @@ var async = require('async');
 
 Yadda.plugins.jasmine.StepLevelPlugin.init();
 
+// var count = 0;
+// var warnCount = 0;
+// var infoCount = 0;
+//
+// afterEach(function(){
+//     browser.manage().logs().get('browser').then(function(browserLog) {
+//         if (browserLog != null && typeof browserLog == "object"){
+//             var msg;
+//             for(var i = 0; i < browserLog.length; i++){
+//                 count++;
+//                 if(browserLog[i].level.name = "WARNING"){
+//                     warnCount++;
+//                 } else if(browserLog[i].level.name = "INFO") {
+//                     infoCount++;
+//                 }
+//                 msg = browserLog[i].level.name + ' - ' + browserLog[i].message;
+//                 console.log('Console: ' + msg);
+//                 console.log(
+//                     ' Overall: ' + count + '\n',
+//                     'Warning: ' + warnCount + '\n',
+//                     'Info: ' + infoCount
+//                 );
+//             }
+//         }
+//     });
+// })
+
 describe('Logistics', function () {
 
     new Yadda.FeatureFileSearch('features/logistics').each(function (file) {
