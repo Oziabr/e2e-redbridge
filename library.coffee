@@ -5,8 +5,6 @@ chai.use require('chai-as-promised')
 expect = chai.expect
 
 
-
-
 ###
 browser.driver.get('http://main.test.redbridge-arm.com')
 browser.driver.manage().window().setSize(1200,800)
@@ -107,7 +105,7 @@ module.exports = do ->
   .when 'переход по первой ссылке первого блока', () ->
     $('.well a').click()
 
-  # --- НАВИГАЦИЯ --- обновить страницу
+  # --- НАВИГАЦИЯ --- обновить страницу-
   .when 'обновить страницу', ->
     browser.refresh()
 
@@ -328,7 +326,8 @@ module.exports = do ->
     element(By.cssContainingText('.good-container', title)).element(By.cssContainingText('tr', search)).$('input[type="number"]').sendKeys(number)
 
   # --- ФОРМА--- select2 после лейбла
-  .when 'открыть в расширенном поиске select2 после ярлыка "$label"', (label) ->
+  .when 'открыть в расширенном поиске select2 после ярлыка
+  "$label"', (label) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::label')).click()
   .when 'ввести в поле select2 "$text"', (text) ->
     $('.select2-drop-active .select2-input').sendKeys(text)
@@ -336,11 +335,17 @@ module.exports = do ->
     element(By.cssContainingText('.select2-result', option)).click()
 
   # --- ФОРМА--- select2 после текста
-  .when 'открыть select2 после параграфа "$paragraph"', (paragraph) ->
+  .when 'открыть select2 после параграфа
+  "$paragraph"', (paragraph) ->
     element(By.cssContainingText('p', paragraph)).element(By.xpath('following-sibling::label')).click()
 
+  # --- ФОРМА--- select2 после дива
+  .when 'открыть select2 после дива "$div"', (div) ->
+    element(By.cssContainingText('fieldset > div.form-group:first-of-type', div)).element(By.xpath('following-sibling::div/div/a')).click()
+
   #--- ФОРМА --- ввести значение в текстовой блок после параграфа
-  .when 'ввести в текстовой блок после параграфа "$paragraph" значение "$text"', (paragraph, text) ->
+  .when 'ввести в текстовой блок после параграфа
+  "$paragraph" значение "$text"', (paragraph, text) ->
     element(By.cssContainingText('p', label)).element(By.xpath('following-sibling::label/textarea')).sendKeys(text)
 
   # --- ФОРМА--- инпут со сбросом
@@ -366,6 +371,10 @@ module.exports = do ->
   # ---  ОШИБКИ --- проверка на наличие ошибок
   .then "нет ошибок", ->
     $$('.site-error').count().then (count) ->
+      expect(count).to.be.equal 0
+
+  .then "нет всплывающих окон", ->
+    $$('.SmallBox').count().then (count) ->
       expect(count).to.be.equal 0
 
   .then "нет модального окна", ->
