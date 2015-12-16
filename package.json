@@ -6,8 +6,9 @@
     "async": "^1.4.2",
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
-    "yadda": "^0.15.2",
-    "jasmine-spec-reporter": "^2.4.0"
+    "jasmine-spec-reporter": "^2.4.0",
+    "lodash": "^3.10.1",
+    "yadda": "^0.15.2"
   },
   "scripts": {
     "test": "protractor conf.coffee",
@@ -19,6 +20,5 @@
     "type": "git",
     "url": "http://www.git.dev.globalpas.com/tvardy/e2e-testsuite.git"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

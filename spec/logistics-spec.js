@@ -2,6 +2,7 @@
 /* global browser, describe, featureFile, scenarios, steps */
 "use strict";
 
+var _ = require('lodash');
 var Yadda = require('yadda');
 var library = require('../library');
 var fs = require('fs');
