@@ -297,7 +297,7 @@ module.exports = do ->
     element(By.cssContainingText('.good-container', title)).element(By.cssContainingText('a', text)).click()
   # --- ИНТЕРАКТИВ --- открытие скрытого поля расширенного поиска
   .when 'открыть поле "$title" поиска', (title) ->
-    element(By.cssContainingText('.smart-form .property-group-header', text)).click()
+    element(By.cssContainingText('.smart-form .property-group-header', title)).click()
   # --- ИНТЕРАКТИВ --- нажать на псевдо ссылку на инпут
   .when 'нажать на псевдо-ссылку с текстом "$text"', (text) ->
     element(By.cssContainingText('.editable-click', text)).click()
