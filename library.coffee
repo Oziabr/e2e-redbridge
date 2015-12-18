@@ -175,6 +175,9 @@ module.exports = do ->
   .when 'ввести в поле с плейсхолдером "$placeholder" значение "$text"', (placeholder, text) ->
     $("[placeholder='#{placeholder}']").sendKeys(text)
   # --- ФОРМА --- ввести значение
+  .when 'очистить поле с плейсхолдером "$placeholder"', (placeholder, text) ->
+    $("[placeholder='#{placeholder}']").clear()
+  # --- ФОРМА --- ввести значение
   .when 'ввести в поле с иконкой "$ico" текст "$text"', (ico, text) ->
     $(".input-group .glyphicon-#{ico}").element(By.xpath('../following-sibling::input')).sendKeys(text)
   # !!! ФОРМА !!! ввести значение
