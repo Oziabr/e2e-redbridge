@@ -525,6 +525,7 @@ module.exports = do ->
   .then "нет модального окна", ->
     $$('.modal').count().then (count) ->
       expect(count).to.be.equal 0
+
   .then 'в таблице есть строка c тесктом "$search",
   чье значение равно "$value"',
   (search, value) ->
@@ -536,21 +537,25 @@ module.exports = do ->
       .getText()
       .then (text) ->
         expect(text).to.be.equal value
+
   .then 'в таблице нет строк c тесктом "$search"', (search) ->
     element.all(By.cssContainingText 'tr', search)
       .count()
       .then (count) ->
         expect(count).to.be.equal 0
-  .then 'всплывающее сообщение типа "$type"', (type) ->
+
+  .then 'всплывающее сообщение типа $type', (type) ->
     $$ "#divSmallBoxes .foto .fa.fa-#{type}"
       .getWebElements()
       .then (list) ->
         (expect list.length).to.be.equal 1
+
   .then 'заголовок всплывающего сообщения "$header"', (header, cb) ->
     $ '#divSmallBoxes .textoFoto span b'
       .getText()
       .then (text) ->
         (expect text).to.be.equal header
+
   .then 'текст всплывающего сообщения "$msg"', (msg) ->
     $ '#divSmallBoxes .textoFoto p span'
       .getText()
