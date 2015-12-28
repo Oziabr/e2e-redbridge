@@ -150,6 +150,13 @@ module.exports = do ->
   # .when 'нажать на типо кнопку "$text"', (text) ->
   #   element(By.cssContainingText('.btn', text)).click()
 
+  # --- ИНТЕРАКТИВ --- нажать на кнопку в блоке
+  .when 'нажать на кнопку "$text" в блоке "$title"',
+  (text, title) ->
+    element(By.cssContainingText('article', title))
+    .element(By.cssContainingText('.btn', text))
+    .click()
+
   # --- ИНТЕРАКТИВ --- нажать на значок
   .when 'нажать на значок $ico', (ico) ->
     $("i.fa-#{ico}").click()
@@ -167,6 +174,10 @@ module.exports = do ->
   # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку
   .when 'нажать на кнопку в модальном окне "$text"', (text) ->
     element(By.cssContainingText('.modal .btn', text)).click()
+
+  # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на значок
+  .when 'нажать на значок в модальном окне $ico', (ico) ->
+    $(".modal i.fa-#{ico}").click()
 
   # --- ИНТЕРАКТИВ ->- Message Box --- нажать на кнопку
   .when 'нажать на кнопку в Message Box "$text"', (text) ->
@@ -250,6 +261,10 @@ module.exports = do ->
   .when 'нажать на чекбокс "$label"', (label) ->
     element(By.cssContainingText('.checkbox', label)).click()
 
+  # --- ФОРМА --- нажать радио
+  .when 'нажать на радио "$label"', (label) ->
+    element(By.cssContainingText('.radio', label)).click()
+
   # --- ФОРМА --- очистить значение
   .when 'очистить поле со значком, следующее после ярлыка "$label"',
   (label) ->
@@ -285,6 +300,21 @@ module.exports = do ->
   во всех строках таблиц',
   (ico) ->
     $$("tr .fa-#{ico}").click()
+
+  # --- ИНТЕРАКТИВ ->- ТАБЛИЦА --- нажать на чекбокс в таблице
+  .when 'нажать на чекбокс в строке таблицы с полем "$search"',
+  (search) ->
+    element(By.cssContainingText('tr', search)).$('.checkbox').click()
+
+  # --- ИНТЕРАКТИВ ->- ТАБЛИЦА --- нажать на радио в таблице
+  .when 'нажать на радио в строке таблицы с полем "$search"',
+  (search) ->
+    element(By.cssContainingText('tr', search)).$('.radio').click()
+
+  # --- ИНТЕРАКТИВ ->- ТАБЛИЦА --- нажать на значок в таблице
+  .when 'нажать на значок $ico в строке таблицы с полем "$search"',
+  (ico, search) ->
+    element(By.cssContainingText('tr', search)).$("i.fa-#{ico}").click()
 
   # --- ИНТЕРАКТИВ ->- ТАБЛИЦЫ --- сортировка
   .when 'нажать на сортироку с текстом "$text"', (text) ->
@@ -364,6 +394,13 @@ module.exports = do ->
   (text) ->
     element(By.cssContainingText('a > b.ng-binding', text)).click()
 
+  # !!!  --- ИНТЕРАКТИВ --- нажать на select2 множественный выбор без поиска
+  .when 'открыть множественный выбор select2 без поиска после ярлыка "$label"',
+  (label) ->
+    element(By.cssContainingText('label', label))
+    .element(By.xpath('following-sibling::form/div/div/ul/li'))
+    .click()
+
   # --- ПОЛЬЗОВАТЕЛИ ---
 
   # --- ФОРМА --- ввести значение в текстовое поле внутри label
@@ -376,14 +413,13 @@ module.exports = do ->
   # --- ИНТЕРАКТИВ --- нажать на результат поиска пользователей
   .when 'нажать на результат поиска пользователей "$text"', (text) ->
     element(By.cssContainingText('a.ng-binding', text)).click()
-  #Костыли под Товары
+
   # --- ФОРМА --- ввести значение
   .when 'ввести в дополнительное поле с иконкой "$ico" текст "$text"',
   (ico, text) ->
     $(".input-group-addon .glyphicon-#{ico}")
     .element(By.xpath('../following-sibling::input'))
     .sendKeys(text)
-
 
   # --- ЛОГИСТИКА ---
   # --- ИНТЕРАКТИВ --- открытие скрытого блока с информацией о товаре
@@ -404,14 +440,14 @@ module.exports = do ->
     element(By.cssContainingText('.editable-click', text))
     .click()
 
-  # --- ИНТЕРАКТИВ --- нажать на кнопку в блоке
+  # --- ИНТЕРАКТИВ --- нажать на кнопку в блоке товара
   .when 'нажать на кнопку "$text" в блоке товара "$title"',
   (text, title) ->
     element(By.cssContainingText('.good-container', title))
     .element(By.cssContainingText('.btn', text))
     .click()
 
-  # --- ИНТЕРАКТИВ --- нажать на кнопку в таблице
+  # --- ИНТЕРАКТИВ --- нажать на кнопку в таблице в блоке товара
   .when 'в блоке товара "$title" нажать на кнопку "$text"
   в строке таблицы с полем "$search"',
   (title, text, search) ->
@@ -467,6 +503,9 @@ module.exports = do ->
   .when 'выбрать опцию "$option" в select2',
   (option) ->
     element(By.cssContainingText('.select2-result', option)).click()
+  .when 'выбрать опцию "$option" в select2 без поиска',
+  (option) ->
+    element(By.cssContainingText('.select2-result-label', option)).click()
 
   # --- ФОРМА--- select2 после текста
   .when 'открыть select2 после параграфа "$paragraph"',
