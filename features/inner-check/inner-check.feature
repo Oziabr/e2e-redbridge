@@ -5,7 +5,6 @@ Feature: Главное меню
 #     Given перейти about:blank
 #     Given перейти http://main.test.redbridge-arm.com
 
-@Only
 Scenario: Login&Setup
     Given установить окно 1200 x 800
     Given запуск таймера "Login"
