@@ -1,5 +1,5 @@
 @goodRead=http://hackersome.com/p/shazam/yadda
-Feature: Товары
+Feature: Сделки
 # Background:
 #     Given установить окно 1200 x 800
 #     Given перейти about:blank
