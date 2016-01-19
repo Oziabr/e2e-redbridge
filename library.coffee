@@ -99,7 +99,9 @@ module.exports = do ->
   # --- НАВИГАЦИЯ --- переход по первой ссылке первого ряда таблицы
   .when 'перейти по первой ссылке первого ряда таблицы', () ->
     $('table tr td a').click()
-
+  # --- НАВИГАЦИЯ --- переход по второй ссылке первого ряда таблицы
+  .when 'перейти по второй ссылке первого ряда таблицы', () ->
+    $('table tr td:nth-child(2) a').click()
   # --- НАВИГАЦИЯ --- переход по первому полю первого ряда таблицы
   .when 'перейти по первому полю первого ряда таблицы', () ->
     $('table tr td').click()
@@ -368,7 +370,8 @@ module.exports = do ->
   (text, num) ->
     element(By.cssContainingText('span.fc-title', text)).getWebElement()
       .then (el) ->
-        console.log 'длина', el.length
+        length = el.length
+        console.log 'длина', length
         return true
 
   # --- ИНТЕРАКТИВ --- нажать на кнопку в тултипе события календаря
