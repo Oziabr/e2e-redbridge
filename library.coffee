@@ -173,6 +173,10 @@ module.exports = do ->
   .when 'нажать на тоггл "$text"', (text) ->
     element(By.cssContainingText('*[ng-click]', text)).click()
 
+  # --- ИНТЕРАКТИВ --- нажать на спан-тоггл с текстом
+  .when 'нажать на спан-тоггл "$text"', (text) ->
+    element(By.cssContainingText('span[ng-click]', text)).click()
+
   # --- ИНТЕРАКТИВ ->- МОДАЛЬНОЕ ОКНО --- нажать на кнопку
   .when 'нажать на кнопку в модальном окне "$text"', (text) ->
     element(By.cssContainingText('.modal .btn', text)).click()
@@ -397,6 +401,10 @@ module.exports = do ->
   (text) ->
     element(By.cssContainingText('a > b.ng-binding', text)).click()
 
+  # --- ИНТЕРАКТИВ --- нажать в карточке контакта на кнопку
+  .when 'нажать в карточке контакта на кнопку "$text"', (text) ->
+    element(By.cssContainingText('#modalCreateContact .btn', text)).click()
+
   # !!!  --- ИНТЕРАКТИВ --- нажать на select2 множественный выбор без поиска
   .when 'открыть множественный выбор select2 без поиска после ярлыка "$label"',
   (label) ->
@@ -423,6 +431,13 @@ module.exports = do ->
     $(".input-group-addon .glyphicon-#{ico}")
     .element(By.xpath('../following-sibling::input'))
     .sendKeys(text)
+
+  # --- ТОВАРЫ ---
+  # --- ФОРМА --- выбрать производителя --- select2
+  .when 'открыть select2 после ярлыка "$label" для выбора производителя',
+  (label) ->
+    element(By.cssContainingText('label', label))
+    .element(By.xpath('following-sibling::div/a')).click()
 
   # --- ЛОГИСТИКА ---
   # --- ИНТЕРАКТИВ --- открытие скрытого блока с информацией о товаре
