@@ -45,4 +45,3 @@ Scenario: Удаление контакта
     When wait "750"
     When нажать на значок warning
     When wait "350"
-    Then нет всплывающих окон
