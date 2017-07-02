@@ -1,4 +1,4 @@
-## What is integrational (or **e2e**) testing
+## What is integrational (also known as *"e2e"*) testing
 
 This is one of the many ways to test your webapp automaticaly (not to confuse with unit-testing). It simulates end-user actions which is closely corresponds to an actual interaction of a real user and production setup.
 
