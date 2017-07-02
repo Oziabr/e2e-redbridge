@@ -11,6 +11,13 @@ Test library is in CoffeeScript. I know it was not mainstream even when I was im
 But you just check library code an see now compact and readable it gets.
 I'm strongly believe it is perfect for an automatic Q&A engineers.
 
+Or just look at this repo statistics: 8000+ SLoC in two months (1kSLoC/week) from an **intern**(sic!).
+Considering that normal step is roughly 3 SLoC, and scenarios is one action per line.
+He basically covers all of the functionality, leaving just border cases and few complicated checks.
+
+Also it is worth to mention that said functionality was independently implemented by *five* fullstack 
+developers, on top of different stacks and components.
+
 # Install
 
 [NodeJS](https://nodejs.org/) - as usual in accordance with your OS
