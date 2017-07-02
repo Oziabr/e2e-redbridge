@@ -2,7 +2,7 @@
 ```
 @goodRead=http://hackersome.com/p/shazam/yadda
 
-Feature: Шаблоны KPI
+Feature: KPI Templates
 Background:
     Given установить окно 1200 x 800
     #Given перейти http://tvardy.dev.globalpas.com
@@ -12,63 +12,55 @@ Scenario: Login&Setup
     Given залогиниться как test003 с паролем test003
     When ткнуть в меню на KPI
 
-Scenario: Создание нового пользовательского KPI [Временной горизонт]
-    When ткнуть в меню на KPI
-    When нажать на кнопку со значком plus
-     And нажать на кнопку [Временной горизонт]
-     And ввести в поле, следующее после ярлыка Название шаблона значение уникальный-тестовый-идентификатор-шаблона
-     And нажать на псевдо кнопку Создать и остаться в списке
-    Then нет модального окна
-     And в таблице есть строка c тесктом "уникальный-тестовый-идентификатор-шаблона", чье значение равно "уникальный-тестовый-идентификатор-шаблона [Временной горизонт]"
-    Then всплывающее сообщение типа "check"
-     And заголовок всплывающего сообщения "Создание нового шаблона"
-     And текст всплывающего сообщения "[Временной горизонт] шаблон «уникальный-тестовый-идентификатор-шаблона» успешно создан"
+Scenario: Creation of a new user defined KPI [Period]
+    When select KPI in menu
+    When push button with plus sign
+     And push button [Period]
+     And type, after label Template Name, value unique-testing-template-id
+     And push pseudo-button Create And Remain In List
+    Then not have modal
+     And table have a row "unique-testing-template-id", which have value of "unique-testing-template-id [Period]"
+    Then have toaster message "check"
+     And header of toaster message is "Creation of new template"
+     And text of toaster message "[Period] template «unique-testing-template-id» successfuly created"
 
 Examples:
-  Временной горизонт
-  Годовой
-  Квартальный
+  Period
+  Yearly
+  Quarterly
 
-Scenario: Неудачное создание нового пользовательского KPI [Временной горизонт] с неуникальным названием
-    When ткнуть в меню на KPI
-    When нажать на кнопку со значком plus
-     And нажать на кнопку [Временной горизонт]
-     And ввести в поле, следующее после ярлыка Название шаблона значение уникальный-тестовый-идентификатор-шаблона
-     And нажать на псевдо кнопку Создать и остаться в списке
-    Then всплывающее сообщение типа "warning"
-     And заголовок всплывающего сообщения "Такой KPI уже создан"
-     And текст всплывающего сообщения "Необходимо указать уникальное название для данного временного горизонта"
-
-Examples:
-  Временной горизонт
-  Годовой
-  Квартальный
-
-Scenario: Неудачное создание нового пользовательского KPI без названия
-    When ткнуть в меню на KPI
-    When нажать на кнопку со значком plus
-     And нажать на кнопку [Временной горизонт]
-     And нажать на псевдо кнопку Создать и остаться в списке
-    Then всплывающее сообщение типа "warning"
-     And заголовок всплывающего сообщения "Ошибка валидации"
-     And текст всплывающего сообщения "Необходимо заполнить «Название KPI»."
+Scenario: Unsuccessful creation of a new user defined KPI [Временной горизонт] with not unique name
+    When select KPI in menu
+    When push button with plus sign
+     And push button [Period]
+     And type, after label Template Name, value unique-testing-template-id
+     And push pseudo-button Create And Remain In List
+    Then modal of the kind "warning"
+     And modal header "KPI of that name already defined"
+     And modal text "You have to specify unique name for new KPI Template"
 
 Examples:
-  Временной горизонт
-  Годовой
+  Period
+  Yearly
+  Quarterly
 
-Scenario: Неудачное создание нового пользовательского KPI без названия
-    When ткнуть в меню на KPI
-    When нажать на кнопку со значком plus
-     And ввести в поле, следующее после ярлыка Название шаблона значение тестовый-идентификатор-шаблона-без-периода
-     And нажать на псевдо кнопку Создать и остаться в списке
-    Then всплывающее сообщение типа "warning"
-     And заголовок всплывающего сообщения "Укажите значение"
-     And текст всплывающего сообщения "Необходимо указать временной горизонт"
+Scenario: Unsuccessful creation of a new user defined KPI [Временной горизонт] without name
+    When select KPI in menu
+    When push button with plus sign
+     And push button [Period]
+     And type, after label Template Name, value unique-testing-template-id
+     And push pseudo-button Create And Remain In List
+    Then modal of the kind "warning"
+     And modal header "Validation error"
+     And modal text "You have to provide «KPI Title»"
 
-Scenario: Удаление двух пользовательских KPI
-    When ткнуть в меню на KPI
-    When нажать на кнопку со значком "trash" в строке таблицы с полем "уникальный-тестовый-идентификатор-шаблона"
-     And нажать на кнопку со значком "trash" в строке таблицы с полем "уникальный-тестовый-идентификатор-шаблона"
-    Then в таблице нет строк c тесктом "уникальный-тестовый-идентификатор-шаблона"
+Examples:
+  Period
+  Yearly
+
+Scenario: Deletion of the two user defined KPI
+    When select KPI in menu
+    When push button with "trash" sign in the row with text "unique-testing-template-id"
+     And push button with "trash" sign in the row with text "unique-testing-template-id"
+    Then table does not contained row with text "unique-testing-template-id"
 ```

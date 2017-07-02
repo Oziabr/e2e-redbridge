@@ -19,7 +19,7 @@ module.exports = ->
 
   # ====
 
-  @Given /^перейти "([^"]*)"$/, (url) ->
+  @Given /^go to "([^"]*)"$/, (url) ->
     browser.get url
   @Given /^logged in as "([^"]*)" with password "([^"]*)"$/, (user, pass) ->
     $("#loginform-username").sendKeys user
@@ -29,34 +29,34 @@ module.exports = ->
     $('[data-action="toggleMenu"]').click()
     browser.driver.sleep(1000)
 
-  @Given "написать $msg", (msg) ->
+  @Given "write $msg", (msg) ->
     console.log 'пишем сообщение в консоль', msg
     browser.driver.sleep(1000)
 
   # ====
 
-  @When /^ткнуть в меню на "([^"]*)"$/, (item) ->
+  @When /^select "([^"]*)" in menu$/, (item) ->
     element(By.cssContainingText('.menu-item-parent', item)).click()
 
-  @When /^нажать на кнопку "([^"]*)"$/, (text) ->
+  @When /^push button "([^"]*)"$/, (text) ->
     element(By.cssContainingText('btn', text)).click()
 
-  @When /^нажать на псевдо кнопку "([^"]*)"$/, (text) ->
+  @When /^push pseudo button "([^"]*)"$/, (text) ->
     element(By.cssContainingText('a.btn', text)).click()
 
-  @When /^нажать на кнопку со значком "([^"]*)"$/, (ico) ->
+  @When /^push button with sign "([^"]*)"$/, (ico) ->
     $("[class='fa fa-#{ico}']").click()
 
-  @When /^ввести в поле, следующее после ярлыка "([^"]*)" значение "([^"]*)"$/, (label, text) ->
+  @When /^type, after the label "([^"]*)", text "([^"]*)"$/, (label, text) ->
     element(By.cssContainingText('label', label)).element(By.xpath('following-sibling::input')).sendKeys(text)
 
   # ====
 
-  @Then /^нет модального окна$/, ->
+  @Then /^not have modal$/, ->
     $$('.modal').count().then (count) ->
       expect(count).to.be.equal 0
 
-  @Then /^в таблице, в блоке "([^"]*)", есть строка c тесктом "([^"]*)", чье значение равно "([^"]*)"$/, (block, search, value) ->
+  @Then /^table, from the block "([^"]*)", has row with text "([^"]*)", which value is equal to "([^"]*)"$/, (block, search, value) ->
     element(By.cssContainingText('h2', 'Список шаблонов KPI'))
       .element(By.xpath('../../header'))
       .element(By.xpath('following-sibling::div'))

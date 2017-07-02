@@ -1,31 +1,31 @@
-# Установка
+# Install
 
-[NodeJS](https://nodejs.org/) - в соответствии с инструкцией для конкретной ОС
+[NodeJS](https://nodejs.org/) - as usual in accordance with your OS
 
-### в никсах
+### *nix
 ```
 $ sudo npm -g install coffee-script protractor phantomjs
 $ npm install
 ```
-### в окнах
+### Windows
 
-установить
+install
 * [Python27](https://www.python.org/downloads/release/python-2710/)
 * [.NET Framework 2.0 SDK](http://www.microsoft.com/en-us/download/confirmation.aspx?id=19988)
 
-и из nodejs консоли
+and from nodejs console
 ```
 npm -g install coffee-script protractor phantomjs
 npm install
 ```
 
-# Запуск
+# RUN
 
-### Всего подряд
+### Everething
 ```
 $ npm test
 ```
-### Одного раздела
+### Particular spec
 ```
 $ protractor conf.coffee --specs=spec/<spec-name>
 ```
@@ -33,20 +33,20 @@ $ protractor conf.coffee --specs=spec/<spec-name>
 # Useful links
 
 ### Protractor
-  Ангуляровская обёртка тестовой системы (используется в определении шагов)
+  Wrapper for testing angular-based apps (used in step definitions)
 
 http://angular.github.io/protractor/#/
 
 ### yadda
-  BDD-framework обрабатывает файлы .feature и зовёт шаги из library.coffee
+  BDD-framework going through `*.feature` files and calling steps from `library.coffee`
 
 http://acuminous.gitbooks.io/yadda-user-guide/content/en/index.html
 
-### описание языка и сценариев
+### Documentation for Cucumber language and Scenarios
 https://cucumber.io/docs/reference
 
 
 # ToDo
 
-* прикрутить репортер
-* перебрать структуру (разнести библиотеку по разным файлам в отдельном каталоге)
+* reporter
+* structure refactoring (spit library into bunch of files)

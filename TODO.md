@@ -1,4 +1,4 @@
-# Состояние автотестов на 21.01.2016
+# Autotests consolidated report as of the 21.01.2016
 
 ## Текущие автотесты
 

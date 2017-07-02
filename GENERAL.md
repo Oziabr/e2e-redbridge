@@ -1,47 +1,47 @@
-## Что такое интеграционные (e2e) тесты
+## What is integrational (or **e2e**) testing
 
-Это один из многих видов автоматического тестирования продукта (не путать с автоматическим тестированием кода), симулирующий действия пользователя в среде, максимально приближенной к реальному взаимодействию предполагаемого пользователя с готовым продуктом.
+This is one of the many ways to test your webapp automaticaly (not to confuse with unit-testing). It simulates end-user actions which is closely corresponds to an actual interaction of a real user and production setup.
 
-## Цель внедрения интеграционных тестов
+## The reasoning behind integrating this tests into your workflow
 
-Убедиться, что:
-+ ранее созданный функционал работает так, как предполагается
-+ в процессе создания нового функционала не ломается ранее созданный функционал (не происходит регресса)
+To ensure:
++ already existed functionality is not affected by introduction of new features (no regression)
 
-## Требования к интеграционным тестам
+## Requirement for integration testing
 
-+ независимость - система тестирования не должна знать о тестируемой системе ничего кроме URL, который может быть любым и распологаться, соответственно, где угодно.
-+ читаемость - очевидные и понятные отчёты
-+ писабельность для не программистов - возможность описывать тестовые сценарии языком, приближенным к человеческому (при этом не слишком длинно - тут помогают таблицы подстановки) 
-+ писабельность для не программистов - легкость реализации универсальных шагов
-+ __максимально полагаться на видимые свойства объектов__ - не использовать css селекторы, жестко заданные координаты, и другие не гибкие спецификации продукта, так же соотносить действия робота с размером страницы браузера и видимой областью
-+ иметь интерактивный режим (для отладки тестов)
-+ запускаться как на машине разработчика в видимом окне, так и на "безголовом" (безэкранном) сервере, для генерации переодических отчётов и интеграции в CI
++ independency - testing system should no be aware about any specifics of test subject (but the URL)
++ readability - useable and compehendable reports
++ writeability for non programmers (Q&A, PM, PO) - ability to write test specification in a natural language
++ repeatability - for running same scenarios with different datasets (substitution tables to the recque)
++ writeability for coders - easy to implement test steps
++ __reliability on visual properties of elements__ - do not use css-selectors and predefined coordinates, also to keeps in check viewport
++ have interactive mode - for steps and scenario debugging
++ runs in the developer environment in an actual browser window, as well as in headless mode on test server
 
-отдельно нужно отметить интеграцию с AngularJS, необходимость которой на данном этапе не вполне очевидна, но которую всё же хочется иметь.
+also is good to have a compatibility with AngularJS for it could not hurt )
 
-## План внедрения
-+ описать и запустить пробный сценарий [DONE]
-+ описать и запустить большой сценарий, работающий сквозь разные компоненты [ONGOING]
-+ предоставить возможность писать и исполнять тесты всем заинтересованным лицам
+## Implementation plan
++ describe and run simple scenario [DONE]
++ describe and test bigger scenario working with many different components [DONE]
++ delegate ability to write and execute tests to any interested party [DONE]
 
-для достижения последнего есть два пути:
-- раздать тестовую среду всем желающим (к примеру, через репозиторий)
-- сделать централизованный тестовый сервер
+The latter should be done in two ways:
++ distribute test environment among all interested party (as from repository)
++ made centralized testing server, which can be plugged in to CI
 
-## Cхема компонентов
+## Components map
 
-Для теста на машине разработчика:
+Testing by developer
 protractor -> yadda -> chrome/firefox
 
-Для тестирования на "безголовом" сервере:
+Testing by headless server
 protractor -> yadda -> webdriver -> phantomjs
 
-где:
-+ [yadda](https://github.com/acuminous/yadda-user-guide/blob/master/en/SUMMARY.md) - предоставляет человеко-ориентированные средства создания тестовых сценариев
-+ [protractor](https://angular.github.io/protractor/#/) - реализует отдельные действия тестовой среды над продуктом
-+ webdriver - сервер, позволяющий использовать браузеры, отличные от chrome/firefox
-+ phantomjs - безголовый браузер на движке webkit
+here:
++ [yadda](https://github.com/acuminous/yadda-user-guide/blob/master/en/SUMMARY.md) - provided human-oriented testing scenarios
++ [protractor](https://angular.github.io/protractor/#/) - executes particular steps over a test-subject
++ webdriver - selenium-server, which allows to execute scenarios on web-browsers different from Chrome and Firefox
++ phantomjs - webkit based headless browser
 
 
 
