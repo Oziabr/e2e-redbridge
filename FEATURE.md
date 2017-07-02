@@ -4,13 +4,12 @@
 
 Feature: KPI Templates
 Background:
-    Given установить окно 1200 x 800
-    #Given перейти http://tvardy.dev.globalpas.com
-    Given перейти http://local.globalpas.com
+    Given set window 1200 x 800
+    Given go to http://local.globalpas.com
 
 Scenario: Login&Setup
-    Given залогиниться как test003 с паролем test003
-    When ткнуть в меню на KPI
+    Given login as test003 with password test003
+    When select KPI in menu
 
 Scenario: Creation of a new user defined KPI [Period]
     When select KPI in menu
