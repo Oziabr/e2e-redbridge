@@ -5,6 +5,12 @@
 - [STEPS.md](STEPS.md) - example steps inmplementation (library)
 - [TODO.md](TODO.md) - legasy report covering **redbrige-arm** webapp (some crazy letters inside)
 
+# Disclamer
+
+Test library is in CoffeeScript. I know it was not mainstream even when I was implementing this project.
+But you just check library code an see now compact and readable it gets.
+I'm strongly believe it is perfect for an automatic Q&A engineers.
+
 # Install
 
 [NodeJS](https://nodejs.org/) - as usual in accordance with your OS
