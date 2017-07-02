@@ -1,5 +1,5 @@
 /features/kpi.feature
-```
+```cucumber
 @goodRead=http://hackersome.com/p/shazam/yadda
 
 Feature: KPI Templates
