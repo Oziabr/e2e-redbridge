@@ -30,7 +30,7 @@ module.exports = ->
     browser.driver.sleep(1000)
 
   @Given "write $msg", (msg) ->
-    console.log 'пишем сообщение в консоль', msg
+    console.log 'writing console message', msg
     browser.driver.sleep(1000)
 
   # ====
@@ -57,7 +57,7 @@ module.exports = ->
       expect(count).to.be.equal 0
 
   @Then /^table, from the block "([^"]*)", has row with text "([^"]*)", which value is equal to "([^"]*)"$/, (block, search, value) ->
-    element(By.cssContainingText('h2', 'Список шаблонов KPI'))
+    element(By.cssContainingText('h2', block))
       .element(By.xpath('../../header'))
       .element(By.xpath('following-sibling::div'))
       .element(By.cssContainingText('tr', search))
