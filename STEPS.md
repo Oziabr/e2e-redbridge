@@ -1,6 +1,6 @@
 /features/steps/_steps.coffee
 
-```
+```coffeescript
 chai = require('chai')
 chaiAsPromised = require('chai-as-promised')
 chai.use chaiAsPromised
