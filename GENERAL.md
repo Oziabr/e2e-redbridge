@@ -31,11 +31,13 @@ The latter should be done in two ways:
 
 ## Components map
 
-Testing by developer
-protractor -> yadda -> chrome/firefox
+Testing by a developer:
 
-Testing by headless server
-protractor -> yadda -> webdriver -> phantomjs
+`protractor` -> `yadda` -> `chrome/firefox`
+
+Testing on headless server:
+
+`protractor` -> `yadda` -> `webdriver` -> `phantomjs`
 
 here:
 + [yadda](https://github.com/acuminous/yadda-user-guide/blob/master/en/SUMMARY.md) - provided human-oriented testing scenarios
