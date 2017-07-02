@@ -1,3 +1,10 @@
+# Content
+
+- [GENERAL.md](GENERAL.md) - general info on the concept
+- [FEATURE.md](FEATURE.md) - example scenario
+- [STEPS.md](STEPS.md) - example steps inmplementation (library)
+- [TODO.md](TODO.md) - legasy report covering **redbrige-arm** webapp (some crazy letters inside)
+
 # Install
 
 [NodeJS](https://nodejs.org/) - as usual in accordance with your OS
